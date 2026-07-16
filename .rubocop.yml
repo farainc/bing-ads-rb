@@ -1,0 +1,24 @@
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  SuggestExtensions: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+Metrics:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+# Resource methods use a named `**options` catch-all so the RDoc can document
+# it; don't force anonymous `**` forwarding.
+Style/ArgumentsForwarding:
+  UseAnonymousForwarding: false
