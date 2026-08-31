@@ -33,8 +33,8 @@ module BingAds
         # Returns an object with +audiences+ and +partial_errors+.
         def find(audience_ids: nil, type: nil, return_additional_fields: nil, **options)
           post("/Audiences/QueryByIds",
-               { audience_ids: audience_ids, type: type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+               { audience_ids: audience_ids, type: Utils.flags(type),
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates one or more existing audiences (UpdateAudiences).

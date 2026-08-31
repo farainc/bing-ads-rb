@@ -22,7 +22,10 @@ module BingAds
         # Gets conversion goals by their identifiers (GetConversionGoalsByIds).
         #
         # +conversion_goal_types+::    Flags enum of goal types to return,
-        #                              e.g. <tt>"Url Duration Event"</tt>.
+        #                              e.g. <tt>"Url,Duration,Event"</tt> (an Array,
+        #                              e.g. <tt>%w[Url Duration Event]</tt>, or a
+        #                              legacy space-separated string are also
+        #                              accepted and normalized).
         # +conversion_goal_ids+::      Optional. Array of conversion goal identifiers;
         #                              nil or empty returns all goals of the specified types.
         # +return_additional_fields+:: Optional. Additional ConversionGoal properties to
@@ -34,15 +37,17 @@ module BingAds
         def find(conversion_goal_types:, conversion_goal_ids: nil, return_additional_fields: nil, **options)
           post("/ConversionGoals/QueryByIds",
                { conversion_goal_ids: conversion_goal_ids,
-                 conversion_goal_types: conversion_goal_types,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 conversion_goal_types: Utils.flags(conversion_goal_types),
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Gets conversion goals by UET tag identifiers (GetConversionGoalsByTagIds).
         #
         # +tag_ids+::                  Array of UET tag identifiers (maximum 100 per call).
         # +conversion_goal_types+::    Flags enum of goal types to return,
-        #                              e.g. <tt>"Url Duration Event"</tt>.
+        #                              e.g. <tt>"Url,Duration,Event"</tt> (an Array or a
+        #                              legacy space-separated string are also accepted
+        #                              and normalized).
         # +return_additional_fields+:: Optional. Additional ConversionGoal properties to
         #                              include in each returned object.
         # +options+:: Optional. Any additional request fields not listed above,
@@ -52,8 +57,8 @@ module BingAds
         def find_by_tag_ids(tag_ids:, conversion_goal_types:, return_additional_fields: nil, **options)
           post("/ConversionGoals/QueryByTagIds",
                { tag_ids: tag_ids,
-                 conversion_goal_types: conversion_goal_types,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 conversion_goal_types: Utils.flags(conversion_goal_types),
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates conversion goals (UpdateConversionGoals).

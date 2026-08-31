@@ -31,7 +31,7 @@ module BingAds
         # Returns an object with +uet_tags+ and +partial_errors+.
         def find(tag_ids: nil, return_additional_fields: nil, **options)
           post("/UetTags/QueryByIds",
-               { tag_ids: tag_ids, return_additional_fields: return_additional_fields, **options }.compact)
+               { tag_ids: tag_ids, return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates UET tags (UpdateUetTags).

@@ -26,7 +26,9 @@ module BingAds
         # +account_id+:: Identifier of the account that contains the campaigns.
         #                Defaults to the client's +account_id+.
         # +campaign_type+:: Optional. Campaign types to return, e.g.
-        #                   <tt>"Search Shopping DynamicSearchAds"</tt>.
+        #                   <tt>"Search,Shopping,DynamicSearchAds"</tt> (an Array,
+        #                   e.g. <tt>%w[Search Shopping]</tt>, or a legacy
+        #                   space-separated string are also accepted and normalized).
         # +return_additional_fields+:: Optional. Additional Campaign properties to
         #                              include in each returned object.
         # +options+:: Optional. Any additional request fields not listed above,
@@ -35,8 +37,8 @@ module BingAds
         # Returns an object with a +campaigns+ array.
         def list(account_id: client.account_id, campaign_type: nil, return_additional_fields: nil, **options)
           post("/Campaigns/QueryByAccountId",
-               { account_id: account_id, campaign_type: campaign_type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+               { account_id: account_id, campaign_type: Utils.flags(campaign_type),
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Gets campaigns by their identifiers (GetCampaignsByIds).
@@ -45,7 +47,9 @@ module BingAds
         # +account_id+:: Identifier of the account that contains the campaigns.
         #                Defaults to the client's +account_id+.
         # +campaign_type+:: Optional. Campaign types to return, e.g.
-        #                   <tt>"Search Shopping DynamicSearchAds"</tt>.
+        #                   <tt>"Search,Shopping,DynamicSearchAds"</tt> (an Array,
+        #                   e.g. <tt>%w[Search Shopping]</tt>, or a legacy
+        #                   space-separated string are also accepted and normalized).
         # +return_additional_fields+:: Optional. Additional Campaign properties to
         #                              include in each returned object.
         # +options+:: Optional. Any additional request fields not listed above,
@@ -55,8 +59,9 @@ module BingAds
         def find(campaign_ids:, account_id: client.account_id, campaign_type: nil,
                  return_additional_fields: nil, **options)
           post("/Campaigns/QueryByIds",
-               { account_id: account_id, campaign_ids: campaign_ids, campaign_type: campaign_type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+               { account_id: account_id, campaign_ids: campaign_ids,
+                 campaign_type: Utils.flags(campaign_type),
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates existing campaigns (UpdateCampaigns).

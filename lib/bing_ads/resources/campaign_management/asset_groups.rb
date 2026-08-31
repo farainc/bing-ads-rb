@@ -34,7 +34,7 @@ module BingAds
         def find(asset_group_ids:, campaign_id:, return_additional_fields: nil, **options)
           post("/AssetGroups/QueryByIds",
                { campaign_id: campaign_id, asset_group_ids: asset_group_ids,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Gets all asset groups in a Performance Max campaign (GetAssetGroupsByCampaignId).

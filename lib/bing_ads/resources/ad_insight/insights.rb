@@ -27,7 +27,7 @@ module BingAds
           post("/AuctionInsightData/Query",
                { entity_type: entity_type, entity_ids: entity_ids,
                  search_parameters: search_parameters,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Returns audience breakdown data.

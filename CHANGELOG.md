@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Flags-enum parameters (`campaign_type`, `conversion_goal_types`,
+  `return_additional_fields`, `criterion_type`, `type` on audiences, Bulk
+  `data_scope`) are now normalized to the comma-joined form the REST API
+  actually accepts. The SOAP-style space-separated strings the docs showed —
+  and Arrays — fail request deserialization entirely with
+  `100 NullRequest "The request message is null"`, a response that gives no
+  hint the flags value was the problem. `BingAds::Utils.flags` accepts an
+  Array, a comma- or space-separated String (or a mix) and emits the
+  comma-joined wire form, so all previously documented shapes now work.
+
 ## [0.1.0] - 2026-07-16
 
 Initial release: Microsoft Advertising (Bing Ads) v13 REST API client.

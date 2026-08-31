@@ -55,6 +55,17 @@ class TestUtils < Minitest::Test
     assert_nil BingAds::Utils.camelize_keys(nil)
   end
 
+  def test_flags_normalizes_arrays_and_spaces_to_commas
+    assert_nil BingAds::Utils.flags(nil)
+    assert_equal "Url,Duration,Event", BingAds::Utils.flags(%w[Url Duration Event])
+    assert_equal "Url,Duration,Event", BingAds::Utils.flags("Url Duration Event")
+    assert_equal "Url,Duration,Event", BingAds::Utils.flags("Url,Duration,Event")
+    assert_equal "Url,Event", BingAds::Utils.flags("Url,  Event")
+    assert_equal "Search", BingAds::Utils.flags("Search")
+    assert_equal "Search", BingAds::Utils.flags(:Search)
+    assert_equal "", BingAds::Utils.flags([])
+  end
+
   def test_underscore
     assert_equal "campaign_ids", BingAds::Utils.underscore("CampaignIds")
     assert_equal "last_sync_time_in_utc", BingAds::Utils.underscore("LastSyncTimeInUTC")

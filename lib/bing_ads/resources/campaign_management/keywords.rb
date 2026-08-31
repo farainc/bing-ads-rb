@@ -37,7 +37,8 @@ module BingAds
         # Returns an object with a +keywords+ array.
         def list(ad_group_id:, return_additional_fields: nil, **options)
           post("/Keywords/QueryByAdGroupId",
-               { ad_group_id: ad_group_id, return_additional_fields: return_additional_fields, **options }.compact)
+               { ad_group_id: ad_group_id, return_additional_fields: Utils.flags(return_additional_fields),
+                 **options }.compact)
         end
 
         # Gets keywords by their identifiers (GetKeywordsByIds).
@@ -54,7 +55,7 @@ module BingAds
         def find(keyword_ids:, ad_group_id:, return_additional_fields: nil, asset_group_id: nil, **options)
           post("/Keywords/QueryByIds",
                { ad_group_id: ad_group_id, keyword_ids: keyword_ids,
-                 return_additional_fields: return_additional_fields,
+                 return_additional_fields: Utils.flags(return_additional_fields),
                  asset_group_id: asset_group_id, **options }.compact)
         end
 
@@ -71,7 +72,7 @@ module BingAds
         def list_by_editorial_status(editorial_status:, ad_group_id:, return_additional_fields: nil, **options)
           post("/Keywords/QueryByEditorialStatus",
                { ad_group_id: ad_group_id, editorial_status: editorial_status,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates keywords within an ad group (UpdateKeywords).

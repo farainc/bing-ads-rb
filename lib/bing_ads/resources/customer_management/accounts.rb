@@ -19,7 +19,8 @@ module BingAds
         # Returns an object with an +account+ field.
         def find(account_id:, return_additional_fields: nil, **options)
           post("/Account/Query",
-               { account_id: account_id, return_additional_fields: return_additional_fields, **options }.compact)
+               { account_id: account_id, return_additional_fields: Utils.flags(return_additional_fields),
+                 **options }.compact)
         end
 
         # Creates a new customer and account (SignupCustomer).
@@ -81,7 +82,7 @@ module BingAds
         def search(predicates:, page_info:, ordering: nil, return_additional_fields: nil, **options)
           post("/Accounts/Search",
                { predicates: predicates, page_info: page_info, ordering: ordering,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Gets a list of accounts and customers matching the specified filter criteria
@@ -97,7 +98,8 @@ module BingAds
         # Returns an object with an +account_info_with_customer_data+ array.
         def find_by_criteria(filter: nil, top_n: nil, return_additional_fields: nil, **options)
           post("/Accounts/Find",
-               { filter: filter, top_n: top_n, return_additional_fields: return_additional_fields, **options }.compact)
+               { filter: filter, top_n: top_n, return_additional_fields: Utils.flags(return_additional_fields),
+                 **options }.compact)
         end
 
         # Gets identifiers, names, and numbers of accounts accessible from the specified customer

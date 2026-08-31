@@ -42,7 +42,7 @@ module BingAds
         def search(predicates:, page_info:, ordering: nil, return_additional_fields: nil, **options)
           post("/InsertionOrders/Search",
                { predicates: predicates, ordering: ordering, page_info: page_info,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
       end
     end

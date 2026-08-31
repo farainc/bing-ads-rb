@@ -47,7 +47,7 @@ module BingAds
         def meta_data_by_account(media_enabled_entities:, page_info: nil, return_additional_fields: nil, **options)
           post("/MediaMetaData/QueryByAccountId",
                { media_enabled_entities: media_enabled_entities, page_info: page_info,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Gets media meta data by media identifiers (GetMediaMetaDataByIds).
@@ -60,7 +60,8 @@ module BingAds
         # Returns an object with +media_meta_data+ and +partial_errors+.
         def meta_data_by_ids(media_ids:, return_additional_fields: nil, **options)
           post("/MediaMetaData/QueryByIds",
-               { media_ids: media_ids, return_additional_fields: return_additional_fields, **options }.compact)
+               { media_ids: media_ids, return_additional_fields: Utils.flags(return_additional_fields),
+                 **options }.compact)
         end
       end
     end

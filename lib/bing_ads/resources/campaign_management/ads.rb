@@ -33,7 +33,7 @@ module BingAds
         def list(ad_group_id:, ad_types: nil, return_additional_fields: nil, **options)
           post("/Ads/QueryByAdGroupId",
                { ad_group_id: ad_group_id, ad_types: ad_types,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Retrieves specific ads from an ad group by their identifiers (GetAdsByIds).
@@ -50,7 +50,7 @@ module BingAds
         def find(ad_ids:, ad_group_id:, ad_types: nil, return_additional_fields: nil, **options)
           post("/Ads/QueryByIds",
                { ad_group_id: ad_group_id, ad_ids: ad_ids, ad_types: ad_types,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Retrieves ads by editorial review status within an ad group (GetAdsByEditorialStatus).
@@ -68,7 +68,7 @@ module BingAds
                                      return_additional_fields: nil, **options)
           post("/Ads/QueryByEditorialStatus",
                { ad_group_id: ad_group_id, editorial_status: editorial_status, ad_types: ad_types,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates one or more ads within an ad group (UpdateAds).
