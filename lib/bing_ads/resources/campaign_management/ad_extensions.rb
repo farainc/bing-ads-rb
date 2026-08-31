@@ -40,7 +40,7 @@ module BingAds
           post("/AdExtensions/QueryByIds",
                { account_id: account_id, ad_extension_ids: ad_extension_ids,
                  ad_extension_type: ad_extension_type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates one or more ad extensions within the account's library (UpdateAdExtensions).
@@ -107,7 +107,7 @@ module BingAds
           post("/AdExtensionsAssociations/Query",
                { account_id: account_id, association_type: association_type,
                  entity_ids: entity_ids, ad_extension_type: ad_extension_type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Associates ad extensions with campaigns or ad groups (SetAdExtensionsAssociations).

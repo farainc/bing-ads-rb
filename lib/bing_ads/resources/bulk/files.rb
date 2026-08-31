@@ -32,7 +32,7 @@ module BingAds
                                     last_sync_time_in_utc: nil, **options)
           post("/Campaigns/DownloadByAccountIds",
                { account_ids: account_ids, download_entities: entities,
-                 compression_type: compression_type, data_scope: data_scope,
+                 compression_type: compression_type, data_scope: Utils.flags(data_scope),
                  download_file_type: download_file_type, format_version: format_version,
                  last_sync_time_in_utc: last_sync_time_in_utc, **options }.compact)
         end
@@ -56,7 +56,7 @@ module BingAds
                                      last_sync_time_in_utc: nil, **options)
           post("/Campaigns/DownloadByCampaignIds",
                { campaigns: campaigns, download_entities: entities,
-                 compression_type: compression_type, data_scope: data_scope,
+                 compression_type: compression_type, data_scope: Utils.flags(data_scope),
                  download_file_type: download_file_type, format_version: format_version,
                  last_sync_time_in_utc: last_sync_time_in_utc, **options }.compact)
         end

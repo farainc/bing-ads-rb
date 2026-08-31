@@ -20,7 +20,8 @@ module BingAds
         # Returns an object with +ad_group_criterion_ids+ and +nested_partial_errors+.
         def create(ad_group_criterions:, criterion_type:, **options)
           post("/AdGroupCriterions",
-               { ad_group_criterions: ad_group_criterions, criterion_type: criterion_type, **options }.compact)
+               { ad_group_criterions: ad_group_criterions, criterion_type: Utils.flags(criterion_type),
+                 **options }.compact)
         end
 
         # Gets ad group criterions by identifiers and types (GetAdGroupCriterionsByIds).
@@ -39,8 +40,8 @@ module BingAds
                  return_additional_fields: nil, **options)
           post("/AdGroupCriterions/QueryByIds",
                { ad_group_id: ad_group_id, ad_group_criterion_ids: ad_group_criterion_ids,
-                 criterion_type: criterion_type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 criterion_type: Utils.flags(criterion_type),
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates one or more ad group criterions (UpdateAdGroupCriterions).
@@ -55,7 +56,8 @@ module BingAds
         # Returns an object with +nested_partial_errors+.
         def update(ad_group_criterions:, criterion_type:, **options)
           put("/AdGroupCriterions",
-              { ad_group_criterions: ad_group_criterions, criterion_type: criterion_type, **options }.compact)
+              { ad_group_criterions: ad_group_criterions, criterion_type: Utils.flags(criterion_type),
+                **options }.compact)
         end
 
         # Deletes one or more ad group criterions (DeleteAdGroupCriterions).
@@ -70,7 +72,7 @@ module BingAds
         def delete(ad_group_criterion_ids:, ad_group_id:, criterion_type:, **options)
           request(:delete, "/AdGroupCriterions",
                   { ad_group_id: ad_group_id, ad_group_criterion_ids: ad_group_criterion_ids,
-                    criterion_type: criterion_type, **options }.compact)
+                    criterion_type: Utils.flags(criterion_type), **options }.compact)
         end
 
         # Applies add, update, or delete actions to ProductPartition criterions (ApplyProductPartitionActions).

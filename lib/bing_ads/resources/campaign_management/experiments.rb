@@ -33,7 +33,7 @@ module BingAds
         def find(experiment_ids: nil, page_info: nil, return_additional_fields: nil, **options)
           post("/Experiments/QueryByIds",
                { experiment_ids: experiment_ids, page_info: page_info,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates existing experiments (UpdateExperiments).

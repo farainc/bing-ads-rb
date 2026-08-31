@@ -40,7 +40,7 @@ module BingAds
                  return_additional_fields: nil, scope: nil, **options)
           post("/BidStrategies/QueryByIds",
                { account_id: account_id, bid_strategy_ids: bid_strategy_ids,
-                 return_additional_fields: return_additional_fields, scope: scope, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), scope: scope, **options }.compact)
         end
 
         # Updates bid strategies in the account's portfolio bid strategy library

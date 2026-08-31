@@ -146,6 +146,11 @@ BingAds::Utils.camelize(:target_roas)  #=> "TargetROAS"
 client.campaign_management.campaigns.list("ReturnAdditionalFields" => "TargetROAS")
 ```
 
+Flags enums (`campaign_type`, `conversion_goal_types`, `return_additional_fields`, …)
+accept an Array or a comma/space-separated String and are normalized to the
+comma-joined form the REST API requires — space-joined strings alone fail the
+whole request with `100 NullRequest`.
+
 ## Customer Management
 
 ```ruby

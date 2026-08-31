@@ -17,6 +17,13 @@ class TestUetTagsResource < Minitest::Test
     assert_requested stub
   end
 
+  def test_find_normalizes_flags_return_additional_fields
+    stub = stub_op(:post, "#{CM}/UetTags/QueryByIds",
+                   { "TagIds" => [4], "ReturnAdditionalFields" => "CustomerShare,MsClarity" })
+    sdk_client.campaign_management.uet_tags.find(tag_ids: [4], return_additional_fields: %w[CustomerShare MsClarity])
+    assert_requested stub
+  end
+
   def test_update
     stub = stub_op(:put, "#{CM}/UetTags", { "UetTags" => [{ "Id" => 4 }] })
     sdk_client.campaign_management.uet_tags.update(uet_tags: [{ "Id" => 4 }])

@@ -19,6 +19,14 @@ class TestConversionGoalsResource < Minitest::Test
     assert_requested stub
   end
 
+  def test_find_normalizes_flags_goal_types
+    stub = stub_op(:post, "#{CM}/ConversionGoals/QueryByIds",
+                   { "ConversionGoalTypes" => "Url,Duration,Event" })
+    sdk_client.campaign_management.conversion_goals.find(conversion_goal_types: %w[Url Duration Event])
+    sdk_client.campaign_management.conversion_goals.find(conversion_goal_types: "Url Duration Event")
+    assert_requested stub, times: 2
+  end
+
   def test_find_by_tag_ids
     stub = stub_op(:post, "#{CM}/ConversionGoals/QueryByTagIds",
                    { "TagIds" => [4], "ConversionGoalTypes" => "Url" })

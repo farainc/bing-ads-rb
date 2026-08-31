@@ -19,6 +19,14 @@ class TestCampaignsResource < Minitest::Test
     assert_requested stub
   end
 
+  def test_list_normalizes_flags_campaign_type
+    stub = stub_op(:post, "#{CM}/Campaigns/QueryByAccountId",
+                   { "AccountId" => 456, "CampaignType" => "Search,Shopping" })
+    sdk_client.campaign_management.campaigns.list(campaign_type: %w[Search Shopping])
+    sdk_client.campaign_management.campaigns.list(campaign_type: "Search Shopping")
+    assert_requested stub, times: 2
+  end
+
   def test_find
     stub = stub_op(:post, "#{CM}/Campaigns/QueryByIds",
                    { "AccountId" => 456, "CampaignIds" => [1, 2] })

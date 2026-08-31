@@ -32,7 +32,7 @@ module BingAds
         def find(import_type:, import_job_ids: nil, return_additional_fields: nil, **options)
           post("/ImportJobs/QueryByIds",
                { import_job_ids: import_job_ids, import_type: import_type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Replaces one or more import jobs with updated definitions (UpdateImportJobs).
@@ -73,8 +73,8 @@ module BingAds
         # Returns an object with +import_results+.
         def results(import_type:, import_job_ids: nil, page_info: nil, return_additional_fields: nil, **options)
           post("/ImportResults/Query",
-               { import_type: import_type, import_job_ids: import_job_ids,
-                 page_info: page_info, return_additional_fields: return_additional_fields, **options }.compact)
+               { import_type: import_type, import_job_ids: import_job_ids, page_info: page_info,
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Requests an upload URL for a file-based import (FileImportUploadUrl query).

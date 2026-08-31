@@ -20,7 +20,8 @@ module BingAds
         # Returns an object with +campaign_criterion_ids+ and +nested_partial_errors+.
         def create(campaign_criterions:, criterion_type:, **options)
           post("/CampaignCriterions",
-               { campaign_criterions: campaign_criterions, criterion_type: criterion_type, **options }.compact)
+               { campaign_criterions: campaign_criterions, criterion_type: Utils.flags(criterion_type),
+                 **options }.compact)
         end
 
         # Gets campaign criterions by identifiers and type (GetCampaignCriterionsByIds).
@@ -39,8 +40,8 @@ module BingAds
                  return_additional_fields: nil, **options)
           post("/CampaignCriterions/QueryByIds",
                { campaign_id: campaign_id, campaign_criterion_ids: campaign_criterion_ids,
-                 criterion_type: criterion_type,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 criterion_type: Utils.flags(criterion_type),
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates one or more campaign criterions (UpdateCampaignCriterions).
@@ -54,7 +55,8 @@ module BingAds
         # Returns an object with +nested_partial_errors+.
         def update(campaign_criterions:, criterion_type:, **options)
           put("/CampaignCriterions",
-              { campaign_criterions: campaign_criterions, criterion_type: criterion_type, **options }.compact)
+              { campaign_criterions: campaign_criterions, criterion_type: Utils.flags(criterion_type),
+                **options }.compact)
         end
 
         # Deletes one or more campaign criterions (DeleteCampaignCriterions).
@@ -69,7 +71,7 @@ module BingAds
         def delete(campaign_criterion_ids:, campaign_id:, criterion_type:, **options)
           request(:delete, "/CampaignCriterions",
                   { campaign_id: campaign_id, campaign_criterion_ids: campaign_criterion_ids,
-                    criterion_type: criterion_type, **options }.compact)
+                    criterion_type: Utils.flags(criterion_type), **options }.compact)
         end
       end
     end

@@ -34,7 +34,8 @@ module BingAds
         # Returns an object with an +ad_groups+ array.
         def list(campaign_id:, return_additional_fields: nil, **options)
           post("/AdGroups/QueryByCampaignId",
-               { campaign_id: campaign_id, return_additional_fields: return_additional_fields, **options }.compact)
+               { campaign_id: campaign_id, return_additional_fields: Utils.flags(return_additional_fields),
+                 **options }.compact)
         end
 
         # Gets ad groups by their identifiers (GetAdGroupsByIds).
@@ -50,7 +51,7 @@ module BingAds
         def find(ad_group_ids:, campaign_id:, return_additional_fields: nil, **options)
           post("/AdGroups/QueryByIds",
                { campaign_id: campaign_id, ad_group_ids: ad_group_ids,
-                 return_additional_fields: return_additional_fields, **options }.compact)
+                 return_additional_fields: Utils.flags(return_additional_fields), **options }.compact)
         end
 
         # Updates existing ad groups in a campaign (UpdateAdGroups).

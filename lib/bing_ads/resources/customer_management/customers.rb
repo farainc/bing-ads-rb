@@ -135,7 +135,8 @@ module BingAds
         # Returns an object with an +account_info_with_customer_data+ array.
         def find_accounts_or_customers_info(filter: nil, top_n: nil, return_additional_fields: nil, **options)
           post("/AccountsOrCustomersInfo/Find",
-               { filter: filter, top_n: top_n, return_additional_fields: return_additional_fields, **options }.compact)
+               { filter: filter, top_n: top_n, return_additional_fields: Utils.flags(return_additional_fields),
+                 **options }.compact)
         end
 
         # Determines whether the submitted address is valid for Microsoft Advertising accounts
