@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- `client.campaign_management.account_properties` — `GetAccountProperties` /
+  `SetAccountProperties` as `find(names:)` and `update(properties:)`, for the
+  account-level tracking template, final URL suffix, MSCLKID auto-tagging and
+  the other `AccountPropertyName` values. Both are REST POSTs
+  (`/AccountProperties/Query`, `/AccountProperties/Set`).
+
 ### Fixed
 
 - Flags-enum parameters (`campaign_type`, `conversion_goal_types`,
