@@ -60,6 +60,7 @@ module BingAds
       resource :recommendations, "CampaignManagement::Recommendations"
       resource :editorial, "CampaignManagement::Editorial"
       resource :utilities, "CampaignManagement::Utilities"
+      resource :account_properties, "CampaignManagement::AccountProperties"
     end
 
     class CustomerManagement < Base

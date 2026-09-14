@@ -9,7 +9,8 @@ Reporting/Bulk workflows — but speaks the JSON REST endpoints instead of SOAP.
 
 - **Campaign Management** — 160+ operations: campaigns, ad groups, ads, keywords,
   ad extensions, budgets, bid strategies, audiences, criterions, labels,
-  conversion goals, UET tags, experiments, import jobs, asset groups, and more
+  conversion goals, UET tags, experiments, import jobs, asset groups, account
+  properties, and more
 - **Customer Management** — users, accounts, customers, client links, invitations
 - **Customer Billing** — billing documents, insertion orders, billing groups, coupons
 - **Ad Insight** — keyword ideas, traffic estimates, bid landscapes, opportunities
